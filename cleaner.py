@@ -31,7 +31,8 @@ with open("cleaner.csv", 'w', encoding='UTF8',newline='') as f2:
             # modele
             struct["modele"] = row[1][row[1].rindex('>') + 1:].strip()
             # localisation
-            struct["localisaton"] = row[2].replace('>', "").replace("\xa0",'').strip()
+            if (len(row[2].split('>')) > 1):
+                struct["localisaton"] =row[2].split('>')[1].strip()
             # energie
             struct["energie"] = row[3].strip()
             # puissance
@@ -53,19 +54,8 @@ with open("cleaner.csv", 'w', encoding='UTF8',newline='') as f2:
             #description
             struct["description"] = row[10].strip()
 
-            #testing
-            # if()
             data = [y for x,y in struct.items()]
             writer.writerow(data)
             print(data)
-            # print(row[2].replace('>', "").replace("\\xa0",'').strip())
-            # if row[5].replace(' ', '').isdigit():
-            #     if int(row[5].strip().replace(' ', '')) < 1000:
-            #         print(int(row[5].strip().replace(' ', '')) * 1000)
-            #     else:
-            #         print(int(row[5].strip().replace(' ', '')))
 
-# import pandas as pd
-# df_csv = pd.read_csv('data1.csv')
-# print(df_csv)
 print("done")
